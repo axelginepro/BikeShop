@@ -28,8 +28,19 @@ router.get('/shop', function(req, res, next) {
 
 //ajout dans le panier
 router.post('/add-shop', function(req, res, next) {
-  console.log(req.body);
-  req.session.dataCardBike.push(req.body)
+
+  var check = false;
+  for (var i = 0; i < req.session.dataCardBike.length; i++) {
+    if (req.body.name === req.session.dataCardBike[i].name) {
+      req.session.dataCardBike[i].quantity++;
+      check = true;
+    }
+  }
+
+  if (check === false) {
+    req.session.dataCardBike.push(req.body)
+  }
+
   res.render('shop', {dataCardBike: req.session.dataCardBike});
 });
 
@@ -41,8 +52,13 @@ router.get('/delete-shop', function(req, res, next) {
 
 //modification d'un element du panier
 router.post('/update-shop', function(req, res, next) {
-  console.log(req.body);
-  req.session.dataCardBike[req.body.position].quantity = req.body.quantity;
+
+  if (req.body.quantity <= 0) {
+    req.session.dataCardBike.splice(req.body.position, 1)
+  } else {
+    req.session.dataCardBike[req.body.position].quantity = parseInt(req.body.quantity);
+  }
+
   res.render('shop', {dataCardBike: req.session.dataCardBike});
 });
 
