@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/a7ec7986bf.js"></script>
+  </head>
+  <body id="checkout-body">
+
+    <div class="container">
+       <div class="row" id="card-header">
+         <div class="col-12">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> my Basket
+          </div>
+       </div>
+       <div class="container" id="checkout-page">
+         <div class="row" id="checkout-subPage">
+
+
+          <p id="title">Merci de votre commande !</p>
+           <p>Détails de votre commande :</p>
+           <div id="contmax">
+             <div class="row card-product-checkout">
+               <div class="col-5">Bike</div>
+               <div class="col-3"><p>Nom</div>
+               <div class="col-2">
+                 <span>Quantitée</span>
+               </div>
+               <div class="col-2">Prix Total</div>
+             </div>
+           </div>
+
+           <%
+           for (var i = 0 ; i < overallCmd.length ; i++) {
+           %>
+             <div id="contmax">
+               <div class="row card-product-checkout">
+                 <div class="col-5"><img class="bike-picture-checkout" src="<%=overallCmd[i].url%>"></div>
+                 <div class="col-3"><p><%=overallCmd[i].name%></p></div>
+                 <div class="col-2">
+                   <span><%=overallCmd[i].quantity%></span>
+                 </div>
+                 <div class="col-2"><%=overallCmd[i].price*overallCmd[i].quantity%>€</div>
+               </div>
+             </div>
+
+          <%
+           }
+          %>
+          <p id="checkout-total">Total facturé : <%= totalAmount%>€</p>
+         </div>
+         <div class="row justify-content-center">
+           <a href="/" id="checkout-btn-shop">Revenir sur le shop</a>
+         </div>
+
+       </div>
+    </div>
+  </body>
+</html>
